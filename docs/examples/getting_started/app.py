@@ -43,6 +43,37 @@ pie = {
     ]
 }
 
+pie_ring = {
+    "title": {"text": "A Case of Doughnut Chart", "left": "center", "top": "center"},
+    "series": [
+        {
+            "type": "pie",
+            "data": [
+                {"value": 335, "name": "A"},
+                {"value": 234, "name": "B"},
+                {"value": 1548, "name": "C"},
+            ],
+            "radius": ["40%", "70%"],
+        }
+    ],
+}
+
+pie_rose = {
+    "series": [
+        {
+            "type": "pie",
+            "data": [
+                {"value": 100, "name": "A"},
+                {"value": 200, "name": "B"},
+                {"value": 300, "name": "C"},
+                {"value": 400, "name": "D"},
+                {"value": 500, "name": "E"},
+            ],
+            "roseType": "area",
+        }
+    ]
+}
+
 
 @ChartRenderer
 def render_bar():
@@ -62,3 +93,13 @@ def render_line():
 @ChartRenderer
 def render_pie():
     return Chart(options, theme=None).add(pie)
+
+
+@ChartRenderer
+def render_pie_ring():
+    return Chart(options).add(pie_ring)
+
+
+@ChartRenderer
+def render_pie_rose():
+    return Chart(options, theme=None).add(pie_rose)
