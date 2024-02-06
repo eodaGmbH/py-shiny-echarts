@@ -1,0 +1,20 @@
+{
+  "name": "echarts-widget",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build-dev": "esbuild srcjs/index.js --bundle --outfile=echarts4py/srcjs/echarts-bindings.js",
+    "prettier": "prettier srcjs --write",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Stefan Kuethe",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.20.0",
+    "prettier": "^3.2.5"
+  }
+}
