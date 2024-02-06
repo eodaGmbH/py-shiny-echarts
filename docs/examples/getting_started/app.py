@@ -74,6 +74,14 @@ pie_rose = {
     ]
 }
 
+scatter = {
+    "xAxis": {},
+    "yAxis": {},
+    "series": [
+        {"type": "scatter", "data": [[10, 5], [0, 8], [6, 10], [2, 12], [8, 9]]}
+    ],
+}
+
 
 @ChartRenderer
 def render_bar():
@@ -103,3 +111,8 @@ def render_pie_ring():
 @ChartRenderer
 def render_pie_rose():
     return Chart(options, theme=None).add(pie_rose)
+
+
+@ChartRenderer
+def render_scatter():
+    return Chart(options).add(scatter)
