@@ -7,6 +7,7 @@
     "test": "tests"
   },
   "scripts": {
+    "build": "esbuild srcjs/index.js --bundle --minify --outfile=echarts4py/srcjs/echarts-bindings.js",
     "build-dev": "esbuild srcjs/index.js --bundle --outfile=echarts4py/srcjs/echarts-bindings.js",
     "prettier": "prettier srcjs --write",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,5 +17,8 @@
   "devDependencies": {
     "esbuild": "^0.20.0",
     "prettier": "^3.2.5"
+  },
+  "dependencies": {
+    "echarts": "^5.4.3"
   }
 }
