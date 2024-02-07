@@ -1,14 +1,18 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
+from typing import Literal
 
 from pandas import DataFrame
+
+from .option import ChartOption
 
 
 @dataclass
 class InitOptions(object):
     width: int = 600
     height: int = 400
+    renderer: Literal["svg", "canvas"] = "svg"
 
 
 class Chart(object):
@@ -25,8 +29,8 @@ class Chart(object):
         self.data = data
         self.option = {}
 
-    def set_option(self, option: dict) -> Chart:
-        self.option = option
+    def set_option(self, option: dict | ChartOption) -> Chart:
+        self.option = option if isinstance(option, dict) else option.to_dict()
         return self
 
     def to_dict(self) -> dict:
