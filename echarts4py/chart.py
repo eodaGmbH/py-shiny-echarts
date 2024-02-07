@@ -30,13 +30,21 @@ class Chart(object):
         return self
 
     def to_dict(self) -> dict:
+        dataset = (
+            {"dataset": {"source": self.data.to_numpy().tolist()}}
+            if isinstance(self.data, DataFrame)
+            else {}
+        )
         return {
+            # TODO: Do not pass data here, dataset is used instead
             "data": (
                 self.data.to_numpy().tolist()
                 if isinstance(self.data, DataFrame)
                 else ["Hi", "there"]
             ),
             "initOptions": asdict(self.init_options),
-            "option": self.option,
+            # "option": dataset.update(self.option),
+            "option": dataset | self.option,
+            # "option": self.option,
             "theme": self.theme,
         }
