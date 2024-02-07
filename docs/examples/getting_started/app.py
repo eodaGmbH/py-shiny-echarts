@@ -86,37 +86,37 @@ scatter = {
 
 @ChartRenderer
 def render_bar():
-    return Chart(options, theme="dark").add(bar)
+    return Chart(options, theme="dark").set_option(bar)
 
 
 @ChartRenderer
 def render_stacked_bar():
-    return Chart(options, theme=None).add(stacked_bar)
+    return Chart(options, theme=None).set_option(stacked_bar)
 
 
 @ChartRenderer
 def render_line():
-    return Chart(options).add(line)
+    return Chart(options).set_option(line)
 
 
 @ChartRenderer
 def render_pie():
-    return Chart(options, theme=None).add(pie)
+    return Chart(options, theme=None).set_option(pie)
 
 
 @ChartRenderer
 def render_pie_ring():
-    return Chart(options).add(pie_ring)
+    return Chart(options).set_option(pie_ring)
 
 
 @ChartRenderer
 def render_pie_rose():
-    return Chart(options, theme=None).add(pie_rose)
+    return Chart(options, theme=None).set_option(pie_rose)
 
 
 @ChartRenderer
 def render_scatter():
-    return Chart(options).add(scatter)
+    return Chart(options).set_option(scatter)
 
 
 # DATASET
@@ -141,4 +141,4 @@ line_from_dataset = {
 
 @ChartRenderer
 def render_dataset():
-    return Chart(options, data=data).add(line_from_dataset)
+    return Chart(options, data=data).set_option(line_from_dataset)

@@ -25,7 +25,7 @@ class Chart(object):
         self.data = data
         self.option = {}
 
-    def add(self, option: dict) -> Chart:
+    def set_option(self, option: dict) -> Chart:
         self.option = option
         return self
 
@@ -36,15 +36,7 @@ class Chart(object):
             else {}
         )
         return {
-            # TODO: Do not pass data here, dataset is used instead
-            "data": (
-                self.data.to_numpy().tolist()
-                if isinstance(self.data, DataFrame)
-                else ["Hi", "there"]
-            ),
             "initOptions": asdict(self.init_options),
-            # "option": dataset.update(self.option),
             "option": dataset | self.option,
-            # "option": self.option,
             "theme": self.theme,
         }
