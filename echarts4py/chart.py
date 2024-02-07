@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 
+from pandas import DataFrame
+
 
 @dataclass
 class InitOptions(object):
@@ -10,21 +12,31 @@ class InitOptions(object):
 
 
 class Chart(object):
+    """Chart"""
+
     def __init__(
-        self, init_options: InitOptions = InitOptions(), theme: str = "dark"
+        self,
+        init_options: InitOptions = InitOptions(),
+        theme: str = "dark",
+        data: DataFrame = None,
     ) -> None:
         self.init_options = init_options
         self.theme = theme
-        self.options = []
+        self.data = data
+        self.option = {}
 
     def add(self, option: dict) -> Chart:
-        self.options.append(option)
+        self.option = option
         return self
 
     def to_dict(self) -> dict:
         return {
-            "data": ["Hi", "there"],
+            "data": (
+                self.data.to_numpy().tolist()
+                if isinstance(self.data, DataFrame)
+                else ["Hi", "there"]
+            ),
             "initOptions": asdict(self.init_options),
-            "options": self.options,
+            "option": self.option,
             "theme": self.theme,
         }

@@ -5,10 +5,10 @@ class EChartsOutputBinding extends Shiny.OutputBinding {
     return scope.find(".shiny-echarts-output");
   }
 
-  renderValue(el, { data, initOptions, options, theme }) {
-    console.log(data, initOptions, options, theme);
+  renderValue(el, { data, initOptions, option, theme }) {
+    console.log(data, initOptions, option, theme);
     const chart = echarts.init(el, theme, initOptions);
-    options.forEach((option) => chart.setOption(option));
+    chart.setOption(option);
   }
 }
 

@@ -1,8 +1,10 @@
 from echarts4py.chart import Chart, InitOptions
 from echarts4py.renderer import ChartRenderer
-from shiny.express import ui
+from pandas import DataFrame
 
 options = InitOptions(width=600, height=400)
+
+data = DataFrame([[1, 2, 3], [4, 5, 6]], columns=["a", "b", "c"])
 
 bar = {
     "xAxis": {"data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]},
@@ -115,4 +117,4 @@ def render_pie_rose():
 
 @ChartRenderer
 def render_scatter():
-    return Chart(options).add(scatter)
+    return Chart(options, data=data).add(scatter)
