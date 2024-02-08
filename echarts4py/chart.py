@@ -5,7 +5,7 @@ from typing import Literal
 
 from pandas import DataFrame
 
-from ._core import BaseOption
+from ._core import BaseOption, df_to_dataset
 from .express import ExpressOption
 from .option import ChartOption
 
@@ -29,7 +29,7 @@ class Chart(object):
         self.init_options = init_options
         self.theme = theme
         self.data = data
-        self.option = {}
+        self.option = dict()
 
     def set_option(
         self, option: dict | ChartOption | ExpressOption | BaseOption
@@ -38,16 +38,7 @@ class Chart(object):
         return self
 
     def to_dict(self) -> dict:
-        dataset = (
-            {
-                "dataset": {
-                    "source": [self.data.columns.to_list()]
-                    + self.data.to_numpy().tolist()
-                }
-            }
-            if isinstance(self.data, DataFrame)
-            else {}
-        )
+        dataset = df_to_dataset(self.data)
         return {
             "initOptions": asdict(self.init_options),
             "option": dataset | self.option,

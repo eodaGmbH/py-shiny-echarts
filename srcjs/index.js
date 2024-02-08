@@ -5,10 +5,12 @@ class EChartsOutputBinding extends Shiny.OutputBinding {
     return scope.find(".shiny-echarts-output");
   }
 
+  // TODO: Remove data, it it alread included in 'option'
   renderValue(el, { data, initOptions, option, theme }) {
-    console.log(data, initOptions, option, theme);
+    console.log(initOptions, option, theme);
     const chart = echarts.init(el, theme, initOptions);
     chart.setOption(option);
+    console.log("current options", chart.getOption());
   }
 }
 

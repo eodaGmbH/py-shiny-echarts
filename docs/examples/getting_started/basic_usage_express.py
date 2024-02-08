@@ -1,5 +1,7 @@
+from echarts4py._core import Bar, Line, Scatter
 from echarts4py.chart import Chart, InitOptions
-from echarts4py.express import Bar, Line, Line_, Pie, Scatter
+from echarts4py.experimental import Line_
+from echarts4py.express import Pie
 from echarts4py.option import ChartOption
 from echarts4py.renderer import ChartRenderer
 from pandas import DataFrame
@@ -12,12 +14,21 @@ options = InitOptions(width=600, height=400, renderer="canvas")
 
 # Line chart
 line_data = DataFrame(
-    [[0, 1, 2, 3], [1, 4, 5, 6], [2, -2, 4, 9]],
+    [
+        [0, 1, 2, 3],
+        [0.7, 2, 3, 4],
+        [1, 0.4, 5, 6],
+        [1.4, 2, 3, 4],
+        [2, -2, 4, 9],
+        [3, 1, 6, 7],
+    ],
     columns=["a", "b", "c", "d"],
 )
 lines = (
-    Line(x="a", y="b", legend={}, tooltip={"trigger": "axis"})
-    .add_series("c")
+    Line(
+        x="a", y="b", legend={}, tooltip={"trigger": "axis"}, xAxis={"type": "category"}
+    )
+    .add_series("c", series_options={"type": "bar"})
     .add_series("d")
 )
 
@@ -34,12 +45,17 @@ bar_data = DataFrame(
             ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
             [23, 24, 18, 25, 27, 28, 25],
             [27, 14, 8, 29, 29, 18, 45],
+            [27, 11, 9, 27, 29, 18, 45],
         )
     ),
-    columns=["month", "2023", "2024"],
+    columns=["month", "2023", "2024", "2035"],
 )
 
-bars = Bar(x="month", y="2023", legend={}).add_series("2024")
+bars = (
+    Bar(x="month", y="2023", legend={})
+    .add_series("2024")
+    .add_series("2025", series_options={"type": "line"})
+)
 
 
 @ChartRenderer
@@ -52,7 +68,7 @@ scatter_data = DataFrame(
     [[10, 5, 4], [0, 8, 3], [6, 10, 12], [2, 12, 6], [8, 9, 7]], columns=["x", "y", "z"]
 )
 
-scatter = Scatter("x", "y", legend={}).add_series("z")
+scatter = Scatter("x", "y", legend={}).add_series("z", series_options={"type": "bar"})
 
 
 @ChartRenderer
@@ -61,14 +77,14 @@ def render_scatter():
 
 
 # Pie chart
-pie_data = DataFrame([["A", 10], ["B", 20], ["C", 40]], columns=["Category", "Value"])
+# pie_data = DataFrame([["A", 10], ["B", 20], ["C", 40]], columns=["name", "value"])
+pie_data = [dict(name=x, value=y) for x, y in zip(["A", "B", "C", "D"], [10, 40, 5, 9])]
 
 pie = Pie(
-    name="Category",
-    value="Value",
     data=pie_data,
-    legend={},
-    tooltip={"trigger": "item"},
+    series_options=dict(roseType="area"),
+    legend=dict(),
+    tooltip=dict(trigger="item"),
 )
 
 
@@ -81,5 +97,5 @@ def render_pie():
 @ChartRenderer
 def render_lines_():
     return Chart(options).set_option(
-        Line_(data=line_data, x="a", y="b", legend=dict()).add("c").add("d")
+        Line_(data=line_data, x="a", y="b", legend=dict())  # .add("c").add("d")
     )

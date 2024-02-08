@@ -1,4 +1,6 @@
-from echarts4py.express import Bar, Line, Line_, Pie
+from echarts4py._core import Line as LineNew
+from echarts4py.experimental import Line_
+from echarts4py.express import Bar, Line, Pie
 from pandas import DataFrame
 
 
@@ -12,6 +14,12 @@ def test_bar():
 
 def test_line():
     chart_option = Line(x="a", y="b")
+
+    print(chart_option.to_dict())
+
+
+def test_line_new():
+    chart_option = LineNew(x="a", y="b")
 
     print(chart_option.to_dict())
 

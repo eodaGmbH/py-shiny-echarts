@@ -1,8 +1,26 @@
+from __future__ import annotations
+
 from dataclasses import asdict, dataclass
+
+from pandas import DataFrame
+
+# from .option import ChartOption
 
 
 def snake_to_camel_case(snake_str: str) -> str:
     return snake_str[0].lower() + snake_str.title()[1:].replace("_", "")
+
+
+def df_to_dataset(df: DataFrame = None) -> dict:
+    return (
+        {"dataset": {"source": [df.columns.to_list()] + df.to_numpy().tolist()}}
+        if isinstance(df, DataFrame)
+        else {}
+    )
+
+
+def df_to_pie_data(df: DataFrame, name: str, value: str) -> list:
+    return [{"name": row[0], "value": row[1]} for row in df[[name, value]].to_numpy()]
 
 
 @dataclass
@@ -23,3 +41,48 @@ class BaseOption(object):
 
     def to_dict(self) -> dict:
         return self.option
+
+
+class BaseOptionXY(BaseOption):
+    def _create_series(self, x: str, y: str, series_options: dict = None) -> dict:
+        return {
+            "name": y,
+            "type": self.CHART_TYPE,
+            "encode": {"x": x, "y": y},
+        } | (series_options or dict())
+
+    def __init__(
+        self,
+        x: str = None,
+        y: str = None,
+        series_options: dict = None,
+        data: DataFrame = None,
+        **kwargs,
+    ) -> None:
+        self.x = x
+        x_axis = dict(type="category") if self.CHART_TYPE == "bar" else dict()
+        series = [self._create_series(x, y, series_options)]
+        defaults = dict(xAxis=x_axis, yAxis=dict())
+        self.option = defaults | kwargs | {"series": series}
+
+    def add_series(self, y: str, series_options: dict = None) -> BaseOptionXY:
+        self.option["series"].append(self._create_series(self.x, y, series_options))
+        return self
+
+
+class Line(BaseOptionXY):
+    """Line Option"""
+
+    CHART_TYPE = "line"
+
+
+class Bar(BaseOptionXY):
+    """Bar Option"""
+
+    CHART_TYPE = "bar"
+
+
+class Scatter(BaseOptionXY):
+    """Scatter Option"""
+
+    CHART_TYPE = "scatter"

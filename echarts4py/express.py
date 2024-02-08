@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from ._core import BaseOption
+from pandas import DataFrame
+
+from ._core import BaseOption, df_to_dataset, df_to_pie_data
 from .option import ChartOption
 
 
@@ -34,7 +36,7 @@ class ExpressOption(BaseOption):
 
 
 class Bar(ExpressOption):
-    """Bar option"""
+    """Bar Option"""
 
     CHART_TYPE = "bar"
 
@@ -56,48 +58,25 @@ class Scatter(ExpressOption):
 
 
 class Pie(BaseOption):
+    """Pie Option"""
+
     CHART_TYPE = "pie"
 
     def __init__(
-        self, name: str | list, value: str | list, data=None, **kwargs
+        self,
+        data: DataFrame | list,
+        name: str = "name",
+        value: str = "value",
+        series_options: dict = dict(),
+        **kwargs,
     ) -> None:
-        self.series = [
-            {
-                "type": self.CHART_TYPE,
-                "data": [
-                    {"name": row[0], "value": row[1]}
-                    for row in data[[name, value]].to_numpy()
-                ],
-            }
-        ]
+        if isinstance(data, DataFrame):
+            data = df_to_pie_data(data, name, value)
+
+        self.series = [series_options | {"type": self.CHART_TYPE, "data": data}]
         self.option = (
             kwargs | {"x_axis": None, "y_axis": None} | {"series": self.series}
         )
-
-    def to_dict(self) -> dict:
-        return ChartOption(**self.option).to_dict()
-
-
-# ---
-class Line_(BaseOption):
-    """Line Option"""
-
-    CHART_TYPE = "line"
-
-    def __init__(self, x: str, y: str, data=None, **kwargs) -> None:
-        self.data = data
-        series = [{"name": y, "data": data[y].to_list(), "type": self.CHART_TYPE}]
-        self.option = kwargs | {
-            "x_axis": {"data": data[x].to_list()},
-            "y_axis": {"axisLine": {"show": True}},
-            "series": series,
-        }
-
-    def add(self, y: str) -> Line_:
-        self.option["series"].append(
-            {"name": y, "data": self.data[y].to_list(), "type": self.CHART_TYPE}
-        )
-        return self
 
     def to_dict(self) -> dict:
         return ChartOption(**self.option).to_dict()
