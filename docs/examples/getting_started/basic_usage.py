@@ -18,9 +18,9 @@ lines = ChartOption(
     tooltip={"trigger": "axis"},
     legend={},
     series=[
-        {"name": "L1", "type": "line", "encode": {"x": 0, "y": 1}},
-        {"name": "L2", "type": "line", "encode": {"x": 0, "y": 2}},
-        {"name": "L3", "type": "line", "encode": {"x": 0, "y": 3}},
+        {"name": "L1", "type": "line", "encode": {"x": "a", "y": "b"}},
+        {"name": "L2", "type": "line", "encode": {"x": "a", "y": "d"}},
+        {"name": "L3", "type": "line", "encode": {"x": 0, "y": "c"}},
     ],
 )
 

@@ -35,7 +35,12 @@ class Chart(object):
 
     def to_dict(self) -> dict:
         dataset = (
-            {"dataset": {"source": self.data.to_numpy().tolist()}}
+            {
+                "dataset": {
+                    "source": [self.data.columns.to_list()]
+                    + self.data.to_numpy().tolist()
+                }
+            }
             if isinstance(self.data, DataFrame)
             else {}
         )
