@@ -63,6 +63,9 @@ class BaseOptionXY(BaseOption):
         x_axis = dict(type="category") if self.CHART_TYPE == "bar" else dict()
         series = [self._create_series(x, y, series_options)]
         defaults = dict(xAxis=x_axis, yAxis=dict())
+        if isinstance(data, DataFrame):
+            defaults.update(df_to_dataset(data))
+
         self.option = defaults | kwargs | {"series": series}
 
     def add_series(self, y: str, series_options: dict = None) -> BaseOptionXY:

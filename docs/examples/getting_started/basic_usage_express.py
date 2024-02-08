@@ -68,12 +68,14 @@ scatter_data = DataFrame(
     [[10, 5, 4], [0, 8, 3], [6, 10, 12], [2, 12, 6], [8, 9, 7]], columns=["x", "y", "z"]
 )
 
-scatter = Scatter("x", "y", legend={}).add_series("z", series_options={"type": "bar"})
+scatter = Scatter("x", "y", legend={}, data=scatter_data).add_series(
+    "z", series_options={"type": "bar"}
+)
 
 
 @ChartRenderer
 def render_scatter():
-    return Chart(options, data=scatter_data).set_option(scatter)
+    return Chart(options).set_option(scatter)
 
 
 # Pie chart
