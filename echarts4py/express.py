@@ -3,7 +3,10 @@ from __future__ import annotations
 from .option import ChartOption
 
 
+# TODO: Make it private
 class ExpressOption(object):
+    """Base Express Option"""
+
     CHART_TYPE: str = "line"
 
     series: list = list()
@@ -30,6 +33,8 @@ class ExpressOption(object):
 
 
 class Bar(ExpressOption):
+    """Bar option"""
+
     CHART_TYPE = "bar"
 
     def __init__(self, x: str, y: str, **kwargs) -> None:
@@ -38,7 +43,9 @@ class Bar(ExpressOption):
 
 
 class Line(ExpressOption):
-    pass
+    """Line Option"""
+
+    CHART_TYPE = "line"
 
 
 class Pie(ExpressOption):
@@ -46,4 +53,6 @@ class Pie(ExpressOption):
 
 
 class Scatter(ExpressOption):
-    pass
+    """Scatter Option"""
+
+    CHART_TYPE = "scatter"

@@ -1,5 +1,5 @@
 from echarts4py.chart import Chart, InitOptions
-from echarts4py.express import Bar, Line
+from echarts4py.express import Bar, Line, Scatter
 from echarts4py.option import ChartOption
 from echarts4py.renderer import ChartRenderer
 from pandas import DataFrame
@@ -45,3 +45,16 @@ bars = Bar(x="month", y="2023", legend={}).add_series("2024")
 @ChartRenderer
 def render_bars():
     return Chart(options, data=bar_data).set_option(bars)
+
+
+# Scatter chart
+scatter_data = DataFrame(
+    [[10, 5, 4], [0, 8, 3], [6, 10, 12], [2, 12, 6], [8, 9, 7]], columns=["x", "y", "z"]
+)
+
+scatter = Scatter("x", "y", legend={}).add_series("z")
+
+
+@ChartRenderer
+def render_scatter():
+    return Chart(options, data=scatter_data).set_option(scatter)
