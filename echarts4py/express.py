@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+from ._core import BaseOption
 from .option import ChartOption
 
 
 # TODO: Make it private
-class ExpressOption(object):
+class ExpressOption(BaseOption):
     """Base Express Option"""
 
     CHART_TYPE: str = "line"
@@ -54,11 +55,12 @@ class Scatter(ExpressOption):
     CHART_TYPE = "scatter"
 
 
-class Pie(ExpressOption):
+class Pie(BaseOption):
     CHART_TYPE = "pie"
 
-    def __init__(self, data, name: str, value: str, **kwargs):
-        super().__init__(**kwargs | {"x_axis": None, "y_axis": None})
+    def __init__(
+        self, name: str | list, value: str | list, data=None, **kwargs
+    ) -> None:
         self.series = [
             {
                 "type": self.CHART_TYPE,
@@ -68,3 +70,9 @@ class Pie(ExpressOption):
                 ],
             }
         ]
+        self.option = (
+            kwargs | {"x_axis": None, "y_axis": None} | {"series": self.series}
+        )
+
+    def to_dict(self) -> dict:
+        return ChartOption(**self.option).to_dict()

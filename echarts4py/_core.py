@@ -14,3 +14,12 @@ class BaseDataClass(object):
                 snake_to_camel_case(k): v for (k, v) in x if v is not None
             },
         )
+
+
+class BaseOption(object):
+    CHART_TYPE: str = None
+
+    option = dict()
+
+    def to_dict(self) -> dict:
+        return self.option

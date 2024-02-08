@@ -5,6 +5,7 @@ from typing import Literal
 
 from pandas import DataFrame
 
+from ._core import BaseOption
 from .express import ExpressOption
 from .option import ChartOption
 
@@ -30,7 +31,9 @@ class Chart(object):
         self.data = data
         self.option = {}
 
-    def set_option(self, option: dict | ChartOption | ExpressOption) -> Chart:
+    def set_option(
+        self, option: dict | ChartOption | ExpressOption | BaseOption
+    ) -> Chart:
         self.option = option if isinstance(option, dict) else option.to_dict()
         return self
 

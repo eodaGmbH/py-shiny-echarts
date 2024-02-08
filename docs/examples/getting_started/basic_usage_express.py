@@ -63,7 +63,13 @@ def render_scatter():
 # Pie chart
 pie_data = DataFrame([["A", 10], ["B", 20], ["C", 40]], columns=["Category", "Value"])
 
-pie = Pie(pie_data, name="Category", value="Value")
+pie = Pie(
+    name="Category",
+    value="Value",
+    data=pie_data,
+    legend={},
+    tooltip={"trigger": "item"},
+)
 
 
 @ChartRenderer
