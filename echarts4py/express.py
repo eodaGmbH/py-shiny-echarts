@@ -12,7 +12,7 @@ class ExpressOption(object):
     series: list = list()
     kwargs: dict = dict()
 
-    def __init__(self, x: str, y: str, **kwargs) -> None:
+    def __init__(self, x: str = None, y: str = None, **kwargs) -> None:
         self.x = x
         self.series = [self._create_series(x, y)]
         self.kwargs = kwargs
@@ -48,11 +48,23 @@ class Line(ExpressOption):
     CHART_TYPE = "line"
 
 
-class Pie(ExpressOption):
-    pass
-
-
 class Scatter(ExpressOption):
     """Scatter Option"""
 
     CHART_TYPE = "scatter"
+
+
+class Pie(ExpressOption):
+    CHART_TYPE = "pie"
+
+    def __init__(self, data, name: str, value: str, **kwargs):
+        super().__init__(**kwargs | {"x_axis": None, "y_axis": None})
+        self.series = [
+            {
+                "type": self.CHART_TYPE,
+                "data": [
+                    {"name": row[0], "value": row[1]}
+                    for row in data[[name, value]].to_numpy()
+                ],
+            }
+        ]

@@ -1,5 +1,5 @@
 from echarts4py.chart import Chart, InitOptions
-from echarts4py.express import Bar, Line, Scatter
+from echarts4py.express import Bar, Line, Pie, Scatter
 from echarts4py.option import ChartOption
 from echarts4py.renderer import ChartRenderer
 from pandas import DataFrame
@@ -58,3 +58,14 @@ scatter = Scatter("x", "y", legend={}).add_series("z")
 @ChartRenderer
 def render_scatter():
     return Chart(options, data=scatter_data).set_option(scatter)
+
+
+# Pie chart
+pie_data = DataFrame([["A", 10], ["B", 20], ["C", 40]], columns=["Category", "Value"])
+
+pie = Pie(pie_data, name="Category", value="Value")
+
+
+@ChartRenderer
+def render_pie():
+    return Chart(options).set_option(pie)
