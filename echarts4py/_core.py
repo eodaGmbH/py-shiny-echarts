@@ -11,12 +11,9 @@ def snake_to_camel_case(snake_str: str) -> str:
     return snake_str[0].lower() + snake_str.title()[1:].replace("_", "")
 
 
+# TODO: Do not check for DataFrame instance here
 def df_to_dataset(df: DataFrame = None) -> dict:
-    return (
-        {"dataset": {"source": [df.columns.to_list()] + df.to_numpy().tolist()}}
-        if isinstance(df, DataFrame)
-        else {}
-    )
+    return {"dataset": {"source": [df.columns.to_list()] + df.to_numpy().tolist()}}
 
 
 def df_to_pie_data(df: DataFrame, name: str, value: str) -> list:

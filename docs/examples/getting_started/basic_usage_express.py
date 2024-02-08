@@ -79,20 +79,21 @@ def render_scatter():
 
 
 # Pie chart
-# pie_data = DataFrame([["A", 10], ["B", 20], ["C", 40]], columns=["name", "value"])
-pie_data = [dict(name=x, value=y) for x, y in zip(["A", "B", "C", "D"], [10, 40, 5, 9])]
+pie_data = DataFrame([["A", 10], ["B", 20], ["C", 40]], columns=["name", "value"])
+# pie_data = [dict(name=x, value=y) for x, y in zip(["A", "B", "C", "D"], [10, 40, 5, 9])]
 
 pie = Pie(
-    data=pie_data,
+    # data=pie_data
     series_options=dict(roseType="area"),
     legend=dict(),
     tooltip=dict(trigger="item"),
+    title={"text": "Awesome", "x": "right"},
 )
 
 
 @ChartRenderer
 def render_pie():
-    return Chart(options).set_option(pie)
+    return Chart(options, data=pie_data).set_option(pie)
 
 
 # ---

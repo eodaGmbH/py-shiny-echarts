@@ -31,6 +31,9 @@ class Chart(object):
         self.data = data
         self.option = dict()
 
+    def set_pie_data(self, data: DataFrame) -> Chart:
+        pass
+
     def set_option(
         self, option: dict | ChartOption | ExpressOption | BaseOption
     ) -> Chart:
@@ -38,7 +41,9 @@ class Chart(object):
         return self
 
     def to_dict(self) -> dict:
-        dataset = df_to_dataset(self.data)
+        dataset = (
+            df_to_dataset(self.data) if isinstance(self.data, DataFrame) else dict()
+        )
         return {
             "initOptions": asdict(self.init_options),
             "option": dataset | self.option,

@@ -7,6 +7,7 @@ from .option import ChartOption
 
 
 # TODO: Make it private
+# TODO: OBSOLETE
 class ExpressOption(BaseOption):
     """Base Express Option"""
 
@@ -35,6 +36,7 @@ class ExpressOption(BaseOption):
         return self.to_option().to_dict()
 
 
+# TODO: OBSOLETE
 class Bar(ExpressOption):
     """Bar Option"""
 
@@ -45,18 +47,21 @@ class Bar(ExpressOption):
         self.kwargs = kwargs | {"x_axis": {"type": "category"}}
 
 
+# TODO: OBSOLETE
 class Line(ExpressOption):
     """Line Option"""
 
     CHART_TYPE = "line"
 
 
+# TODO: OBSOLETE
 class Scatter(ExpressOption):
     """Scatter Option"""
 
     CHART_TYPE = "scatter"
 
 
+# TODO: Move to '_core'
 class Pie(BaseOption):
     """Pie Option"""
 
@@ -64,7 +69,7 @@ class Pie(BaseOption):
 
     def __init__(
         self,
-        data: DataFrame | list,
+        data: DataFrame | list = None,
         name: str = "name",
         value: str = "value",
         series_options: dict = dict(),
