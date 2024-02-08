@@ -1,4 +1,4 @@
-from echarts4py.express import Bar, Line, Pie
+from echarts4py.express import Bar, Line, Line_, Pie
 from pandas import DataFrame
 
 
@@ -23,3 +23,12 @@ def test_pie():
 
     print(chart_option.series)
     print(chart_option.to_dict())
+
+
+# ---
+def test_line2():
+    data = DataFrame([["1", 10], [2, 4]], columns=["x", "y"])
+
+    chart_option = Line_(x="x", y="y", data=data)
+
+    print("line2", chart_option.to_dict())

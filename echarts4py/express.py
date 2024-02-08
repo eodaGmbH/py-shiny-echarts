@@ -76,3 +76,28 @@ class Pie(BaseOption):
 
     def to_dict(self) -> dict:
         return ChartOption(**self.option).to_dict()
+
+
+# ---
+class Line_(BaseOption):
+    """Line Option"""
+
+    CHART_TYPE = "line"
+
+    def __init__(self, x: str, y: str, data=None, **kwargs) -> None:
+        self.data = data
+        series = [{"name": y, "data": data[y].to_list(), "type": self.CHART_TYPE}]
+        self.option = kwargs | {
+            "x_axis": {"data": data[x].to_list()},
+            "y_axis": {"axisLine": {"show": True}},
+            "series": series,
+        }
+
+    def add(self, y: str) -> Line_:
+        self.option["series"].append(
+            {"name": y, "data": self.data[y].to_list(), "type": self.CHART_TYPE}
+        )
+        return self
+
+    def to_dict(self) -> dict:
+        return ChartOption(**self.option).to_dict()
