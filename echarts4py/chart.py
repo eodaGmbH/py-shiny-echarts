@@ -22,7 +22,7 @@ class Chart(object):
     def __init__(
         self,
         init_options: InitOptions = InitOptions(),
-        theme: str = "dark",
+        theme: str | None = "dark",
         data: DataFrame = None,
     ) -> None:
         self.init_options = init_options
