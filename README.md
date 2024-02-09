@@ -17,7 +17,7 @@ pip install git+https://github.com/eodaGmbH/py-shiny-echarts
 
 ```python
 from echarts4py.chart import Chart, InitOptions
-from echarts4py.option import ChartOption
+from echarts4py.options import ChartOption
 from echarts4py.renderer import ChartRenderer
 from pandas import DataFrame
 
