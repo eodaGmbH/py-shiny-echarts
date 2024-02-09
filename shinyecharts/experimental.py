@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from echarts4py._core import BaseOption
-from echarts4py.options import ChartOption
+from shinyecharts._core import BaseOption
+from shinyecharts.options import ChartOption
 
 # "boundaryGap": False,
 # "splitLine": {"show": True},

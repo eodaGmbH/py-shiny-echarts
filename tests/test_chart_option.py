@@ -1,4 +1,4 @@
-from echarts4py.options import ChartOption
+from shinyecharts.options import ChartOption
 
 
 def test_chart_options():

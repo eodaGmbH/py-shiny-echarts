@@ -1,5 +1,5 @@
-from echarts4py.chart import Chart, InitOptions
-from echarts4py.options import Pie
+from shinyecharts.chart import Chart, InitOptions
+from shinyecharts.options import Pie
 
 
 def test_chart():

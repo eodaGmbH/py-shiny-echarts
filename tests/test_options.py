@@ -1,5 +1,5 @@
-from echarts4py.options import Bar, Line, Pie, Scatter
 from pandas import DataFrame
+from shinyecharts.options import Bar, Line, Pie, Scatter
 
 
 def test_bar():

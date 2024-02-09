@@ -16,9 +16,9 @@ pip install git+https://github.com/eodaGmbH/py-shiny-echarts
 ## Basic usage
 
 ```python
-from echarts4py.chart import Chart, InitOptions
-from echarts4py.options import Line
-from echarts4py.renderer import ChartRenderer
+from shinyecharts.chart import Chart, InitOptions
+from shinyecharts.options import Line
+from shinyecharts.renderer import ChartRenderer
 from pandas import DataFrame
 
 # Must always be imported, otherwise App is not found
@@ -30,7 +30,6 @@ data = DataFrame(
     [[0, 1, 2, 3], [1, 4, 5, 6], [2, -2, 4, 9]],
     columns=["a", "b", "c", "d"],
 )
-
 
 lines = (
     Line(x="a", y="b", tooltip=dict(trigger="axis"), legend=dict())

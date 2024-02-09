@@ -1,7 +1,7 @@
-from echarts4py.chart import Chart, InitOptions
-from echarts4py.renderer import ChartRenderer
 from pandas import DataFrame
 from shiny.express import ui
+from shinyecharts.chart import Chart, InitOptions
+from shinyecharts.renderer import ChartRenderer
 
 options = InitOptions(width=600, height=400)
 
