@@ -1,7 +1,7 @@
 # py-shiny-echarts: ECharts for Shiny for Python
 
 [![Release](https://img.shields.io/github/v/release/eodaGmbH/py-shiny-echarts)](https://img.shields.io/github/v/release/eodaGmbH/py-shiny-echarts)
-[![pypi](https://img.shields.io/pypi/v/shiny-echarts.svg)](https://pypi.python.org/pypi/shiny-echarts)
+[![pypi](https://img.shields.io/pypi/v/shinyecharts.svg)](https://pypi.python.org/pypi/shinyecharts)
 [![Build status](https://img.shields.io/github/actions/workflow/status/eodaGmbH/py-shiny-echarts/pytest.yml?branch=main)](https://img.shields.io/github/actions/workflow/status/eodaGmbH/py-shiny-echarts/pytest.yml?branch=main)
 [![License](https://img.shields.io/github/license/eodaGmbH/py-shiny-echarts)](https://img.shields.io/github/license/eodaGmbH/py-shiny-echarts)
 
