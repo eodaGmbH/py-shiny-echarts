@@ -6,8 +6,7 @@ from typing import Literal
 from pandas import DataFrame
 
 from ._core import BaseOption, df_to_dataset
-from .express import ExpressOption
-from .option import ChartOption
+from .options import ChartOption
 
 
 @dataclass
@@ -34,9 +33,7 @@ class Chart(object):
     def set_pie_data(self, data: DataFrame) -> Chart:
         pass
 
-    def set_option(
-        self, option: dict | ChartOption | ExpressOption | BaseOption
-    ) -> Chart:
+    def set_option(self, option: dict | ChartOption | BaseOption) -> Chart:
         self.option = option if isinstance(option, dict) else option.to_dict()
         return self
 
