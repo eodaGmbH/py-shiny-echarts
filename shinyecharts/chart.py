@@ -5,7 +5,8 @@ from typing import Literal
 
 from pandas import DataFrame
 
-from .option import ChartOption
+from ._core import BaseOption, df_to_dataset
+from .options import ChartOption
 
 
 @dataclass
@@ -21,28 +22,24 @@ class Chart(object):
     def __init__(
         self,
         init_options: InitOptions = InitOptions(),
-        theme: str = "dark",
+        theme: str | None = "dark",
         data: DataFrame = None,
     ) -> None:
         self.init_options = init_options
         self.theme = theme
         self.data = data
-        self.option = {}
+        self.option = dict()
 
-    def set_option(self, option: dict | ChartOption) -> Chart:
+    def set_pie_data(self, data: DataFrame) -> Chart:
+        pass
+
+    def set_option(self, option: dict | ChartOption | BaseOption) -> Chart:
         self.option = option if isinstance(option, dict) else option.to_dict()
         return self
 
     def to_dict(self) -> dict:
         dataset = (
-            {
-                "dataset": {
-                    "source": [self.data.columns.to_list()]
-                    + self.data.to_numpy().tolist()
-                }
-            }
-            if isinstance(self.data, DataFrame)
-            else {}
+            df_to_dataset(self.data) if isinstance(self.data, DataFrame) else dict()
         )
         return {
             "initOptions": asdict(self.init_options),

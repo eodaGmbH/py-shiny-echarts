@@ -5,7 +5,7 @@ from shiny.module import resolve_id
 echarts_bindings_dep = HTMLDependency(
     "echarts-bindings",
     version="1.0.0",
-    source={"package": "echarts4py", "subdir": "srcjs"},
+    source={"package": "shinyecharts", "subdir": "srcjs"},
     script={"src": "echarts-bindings.js", "type": "module"},
     all_files=False,
 )
