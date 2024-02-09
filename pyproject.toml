@@ -1,18 +1,15 @@
 [tool.poetry]
 name = "shinyecharts"
-version = "0.1.0"
+version = "0.1.1"
 description = "ECharts for Shiny"
 authors = ["Stefan Kuethe <stefan.kuethe@eoda.de>"]
 readme = "README.md"
 license = "MIT"
-# packages = [
-#     {include = "shinyecharts"}
-# ]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 shiny = "^0.7.1"
-pandas = "^2.2.0"
+pandas = "*"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.1.1"

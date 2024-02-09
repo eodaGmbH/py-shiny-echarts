@@ -14,6 +14,10 @@ This package is still in an early state.
 ## Installation
 
 ```bash
+# Stable
+pip install shinyecharts
+
+# Dev
 pip install git+https://github.com/eodaGmbH/py-shiny-echarts
 ```
 
