@@ -4,8 +4,6 @@ from dataclasses import asdict, dataclass
 
 from pandas import DataFrame
 
-# from .option import ChartOption
-
 
 def snake_to_camel_case(snake_str: str) -> str:
     return snake_str[0].lower() + snake_str.title()[1:].replace("_", "")
@@ -68,21 +66,3 @@ class BaseOptionXY(BaseOption):
     def add_series(self, y: str, series_options: dict = None) -> BaseOptionXY:
         self.option["series"].append(self._create_series(self.x, y, series_options))
         return self
-
-
-class Line(BaseOptionXY):
-    """Line Option"""
-
-    CHART_TYPE = "line"
-
-
-class Bar(BaseOptionXY):
-    """Bar Option"""
-
-    CHART_TYPE = "bar"
-
-
-class Scatter(BaseOptionXY):
-    """Scatter Option"""
-
-    CHART_TYPE = "scatter"

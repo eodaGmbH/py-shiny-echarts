@@ -1,5 +1,4 @@
-from echarts4py._core import Bar, Line, Scatter
-from echarts4py.options import Pie
+from echarts4py.options import Bar, Line, Pie, Scatter
 from pandas import DataFrame
 
 

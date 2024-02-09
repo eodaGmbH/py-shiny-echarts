@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 
 from pandas import DataFrame
 
-from ._core import BaseDataClass, BaseOption, df_to_pie_data
+from ._core import BaseDataClass, BaseOption, BaseOptionXY, df_to_pie_data
 
 
 @dataclass
@@ -54,3 +54,21 @@ class Pie(BaseOption):
 
     def to_dict(self) -> dict:
         return ChartOption(**self.option).to_dict()
+
+
+class Line(BaseOptionXY):
+    """Line Option"""
+
+    CHART_TYPE = "line"
+
+
+class Bar(BaseOptionXY):
+    """Bar Option"""
+
+    CHART_TYPE = "bar"
+
+
+class Scatter(BaseOptionXY):
+    """Scatter Option"""
+
+    CHART_TYPE = "scatter"

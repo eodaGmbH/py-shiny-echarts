@@ -9,7 +9,7 @@ from echarts4py.options import ChartOption
 # "minorTick": {},
 
 
-class Line_(BaseOption):
+class Line(BaseOption):
     """Line Option"""
 
     CHART_TYPE = "line"
