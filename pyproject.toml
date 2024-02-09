@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "echarts4py"
+name = "shinyecharts"
 version = "0.1.0"
 description = ""
 authors = ["Stefan Kuethe <stefan.kuethe@eoda.de>"]
