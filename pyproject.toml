@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "shiny-echarts"
+name = "shinyecharts"
 version = "0.1.0"
 description = "ECharts for Shiny"
 authors = ["Stefan Kuethe <stefan.kuethe@eoda.de>"]
 readme = "README.md"
 license = "MIT"
-packages = [
-    {include = "shinyecharts"}
-]
+# packages = [
+#     {include = "shinyecharts"}
+# ]
 
 [tool.poetry.dependencies]
 python = "^3.9"
