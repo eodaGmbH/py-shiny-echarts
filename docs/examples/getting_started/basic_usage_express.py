@@ -91,11 +91,3 @@ pie = Pie(
 @ChartRenderer
 def render_pie():
     return Chart(options, data=pie_data).set_option(pie)
-
-
-# ---
-@ChartRenderer
-def render_lines_():
-    return Chart(options).set_option(
-        Line_(data=line_data, x="a", y="b", legend=dict())  # .add("c").add("d")
-    )
