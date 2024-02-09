@@ -1,42 +1,45 @@
-from echarts4py._core import Line as LineNew
-from echarts4py.experimental import Line_
-from echarts4py.express import Bar, Line, Pie
+from echarts4py._core import Bar, Line, Scatter
+from echarts4py.options import Pie
 from pandas import DataFrame
 
 
 def test_bar():
+    # Act
     chart_option = Bar(x="a", y="b", legend={})
 
-    print(chart_option.to_option())
-
-    print(chart_option.to_dict())
+    # Assert
+    print("bar option", chart_option.to_dict())
+    # print(sorted(list(chart_option.to_dict().keys())))
+    assert sorted(list(chart_option.to_dict().keys())) == sorted(
+        ["xAxis", "yAxis", "legend", "series"]
+    )
 
 
 def test_line():
+    # Act
     chart_option = Line(x="a", y="b")
 
-    print(chart_option.to_dict())
+    # Assert
+    print("line option", chart_option.to_dict())
+    assert list(chart_option.to_dict().keys()) == ["xAxis", "yAxis", "series"]
 
 
-def test_line_new():
-    chart_option = LineNew(x="a", y="b")
+def test_scatter():
+    # Act
+    chart_option = Scatter(x="a", y="b")
 
-    print(chart_option.to_dict())
+    # Assert
+    print("scatter option", chart_option.to_dict())
+    assert list(chart_option.to_dict().keys()) == ["xAxis", "yAxis", "series"]
 
 
 def test_pie():
+    # Prepare
     data = DataFrame([["A", 10], ["B", 20], ["C", 40]], columns=["Category", "Value"])
 
+    # Act
     chart_option = Pie(data=data, name="Category", value="Value")
 
-    print(chart_option.series)
-    print(chart_option.to_dict())
-
-
-# ---
-def test_line2():
-    data = DataFrame([["1", 10], [2, 4]], columns=["x", "y"])
-
-    chart_option = Line_(x="x", y="y", data=data)
-
-    print("line2", chart_option.to_dict())
+    # Assert
+    # print(chart_option.series)
+    print("pie option", chart_option.to_dict())

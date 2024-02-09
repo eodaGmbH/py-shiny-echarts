@@ -1,9 +1,7 @@
 from __future__ import annotations
 
-from pandas import DataFrame
-
-from ._core import BaseOption, df_to_dataset, df_to_pie_data
-from .option import ChartOption
+from ._core import BaseOption
+from .options import ChartOption
 
 
 # TODO: Make it private
@@ -62,26 +60,3 @@ class Scatter(ExpressOption):
 
 
 # TODO: Move to '_core'
-class Pie(BaseOption):
-    """Pie Option"""
-
-    CHART_TYPE = "pie"
-
-    def __init__(
-        self,
-        data: DataFrame | list = None,
-        name: str = "name",
-        value: str = "value",
-        series_options: dict = dict(),
-        **kwargs,
-    ) -> None:
-        if isinstance(data, DataFrame):
-            data = df_to_pie_data(data, name, value)
-
-        self.series = [series_options | {"type": self.CHART_TYPE, "data": data}]
-        self.option = (
-            kwargs | {"x_axis": None, "y_axis": None} | {"series": self.series}
-        )
-
-    def to_dict(self) -> dict:
-        return ChartOption(**self.option).to_dict()

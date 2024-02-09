@@ -1,4 +1,4 @@
-from echarts4py.option import ChartOption
+from echarts4py.options import ChartOption
 
 
 def test_chart_options():
