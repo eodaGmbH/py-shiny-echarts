@@ -1,6 +1,6 @@
 from pandas import DataFrame
 from shiny.express import ui
-from shinyecharts.chart import Chart, InitOptions
+from shinyecharts import Chart, InitOptions
 from shinyecharts.renderer import ChartRenderer
 
 options = InitOptions(width=600, height=400)

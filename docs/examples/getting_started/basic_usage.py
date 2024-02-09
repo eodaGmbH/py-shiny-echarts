@@ -2,7 +2,7 @@ from pandas import DataFrame
 
 # Must always be imported, otherwise App is not found
 from shiny.express import ui
-from shinyecharts.chart import Chart, InitOptions
+from shinyecharts import Chart, InitOptions
 from shinyecharts.options import Line
 from shinyecharts.renderer import ChartRenderer
 

@@ -7,6 +7,10 @@
 
 [Shiny for Python](https://shiny.posit.co/py/) bindings for [ECharts JS](https://echarts.apache.org/)
 
+## Note
+
+This package is still in an early state.
+
 ## Installation
 
 ```bash
@@ -16,13 +20,13 @@ pip install git+https://github.com/eodaGmbH/py-shiny-echarts
 ## Basic usage
 
 ```python
-from shinyecharts.chart import Chart, InitOptions
-from shinyecharts.options import Line
-from shinyecharts.renderer import ChartRenderer
 from pandas import DataFrame
 
 # Must always be imported, otherwise App is not found
 from shiny.express import ui
+from shinyecharts import Chart, InitOptions
+from shinyecharts.options import Line
+from shinyecharts.renderer import ChartRenderer
 
 init_options = InitOptions(width=600, height=400, renderer="canvas")
 
@@ -30,6 +34,7 @@ data = DataFrame(
     [[0, 1, 2, 3], [1, 4, 5, 6], [2, -2, 4, 9]],
     columns=["a", "b", "c", "d"],
 )
+
 
 lines = (
     Line(x="a", y="b", tooltip=dict(trigger="axis"), legend=dict())
