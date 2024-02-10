@@ -16,6 +16,7 @@ class InitOptions(object):
     renderer: Literal["svg", "canvas"] = "svg"
 
 
+# TODO: Move to _core
 class Chart(object):
     """Chart"""
 
@@ -28,9 +29,20 @@ class Chart(object):
         self.init_options = init_options
         self.theme = theme
         self.data = data
+
+        # TODO: Move to class attributes
         self.option = dict()
 
+    # TODO: Remove
     def set_pie_data(self, data: DataFrame) -> Chart:
+        pass
+
+    # Set option attributes
+    def attr(self, **kwargs) -> Chart:
+        pass
+
+    # TODO: Set data here
+    def set_data(self, data: DataFrame) -> Chart:
         pass
 
     def set_option(self, option: dict | ChartOption | BaseOption) -> Chart:
