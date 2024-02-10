@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "esbuild srcjs/index.js --bundle --minify --outfile=echarts4py/srcjs/echarts-bindings.js",
-    "build-dev": "esbuild srcjs/index.js --bundle --outfile=echarts4py/srcjs/echarts-bindings.js",
+    "build": "esbuild srcjs/index.js --bundle --minify --outfile=shinyecharts/srcjs/echarts-bindings.js",
+    "build-dev": "esbuild srcjs/index.js --bundle --outfile=shinyecharts/srcjs/echarts-bindings.js",
     "prettier": "prettier srcjs --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
