@@ -1,6 +1,6 @@
 from pandas import DataFrame
 from shiny.express import ui
-from shinyecharts.express import Chart, InitOptions
+from shinyecharts.express import Chart, InitOptions, SeriesType
 from shinyecharts.renderer import ChartRenderer
 
 init_options = InitOptions(width=600, height=400, renderer="canvas")
@@ -10,17 +10,45 @@ data = DataFrame(
     columns=["a", "b", "c", "d"],
 )
 
+pie_data = DataFrame([["A", 10], ["B", 20], ["C", 30]], columns=["name", "value"])
+
 
 @ChartRenderer
-def render_lines():
+def render_line_chart():
     return Chart().data(data).encode("a", "b").encode("a", "c", color="pink")
 
 
 @ChartRenderer
-def render_scatter():
+def render_line_chart2():
+    return (
+        Chart()
+        .dark()
+        .data(data)
+        .series(SeriesType.LINE, encode=dict(x="a", y="b"), name="b", color="green")
+    )
+    # .encode("a", "b").encode("a", "c", color="pink"))
+
+
+@ChartRenderer
+def render_scatter_chart():
     return Chart().data(data).encode("a", "b", type="scatter")
 
 
 @ChartRenderer
 def render_bar():
-    return Chart().data(data).encode("a", "b", type="bar").encode("a", "c", type="bar")
+    return (
+        Chart()
+        .dark()
+        .data(data)
+        .series_type(SeriesType.BAR)
+        .encode("a", "b")
+        .encode("a", "c")
+        .tooltip(trigger="axis")
+    )
+
+
+@ChartRenderer
+def render_pie_chart():
+    # return Chart().data(pie_data).series("bar", encode=dict(x="name", y="value"))
+    # return Chart().data(pie_data).encode("name", "value", "bar")
+    return Chart().data(pie_data).series("pie")

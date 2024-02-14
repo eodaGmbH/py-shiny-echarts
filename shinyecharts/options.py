@@ -1,3 +1,5 @@
+# DEPRECATED: Use 'express.Chart' instead
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field

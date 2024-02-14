@@ -18,10 +18,10 @@ class InitOptions(object):
 
 # TODO: Move to _core
 class Chart(object):
-    """Chart"""
+    """Create a Chart instance"""
 
     _theme: str = None
-    _option: dict = dict()
+    _option: dict = None
     _data: DataFrame = None
 
     def __init__(
@@ -32,7 +32,11 @@ class Chart(object):
     ) -> None:
         self._init_options = init_options
         self._theme = theme
+        self._option = dict()
         self._data = data
+
+    def get_options(self) -> dict:
+        return self.to_dict()["option"]
 
     # Set option attributes
     def attr(self, **kwargs) -> Chart:
