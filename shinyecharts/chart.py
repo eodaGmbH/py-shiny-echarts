@@ -20,41 +20,38 @@ class InitOptions(object):
 class Chart(object):
     """Chart"""
 
+    _theme: str = None
+    _option: dict = dict()
+    _data: DataFrame = None
+
     def __init__(
         self,
         init_options: InitOptions = InitOptions(),
-        theme: str | None = "dark",
+        theme: str = None,
         data: DataFrame = None,
     ) -> None:
-        self.init_options = init_options
-        self.theme = theme
-        self.data = data
-
-        # TODO: Move to class attributes
-        self.option = dict()
-
-    # TODO: Remove
-    def set_pie_data(self, data: DataFrame) -> Chart:
-        pass
+        self._init_options = init_options
+        self._theme = theme
+        self._data = data
 
     # Set option attributes
     def attr(self, **kwargs) -> Chart:
         pass
 
     # TODO: Set data here
-    def set_data(self, data: DataFrame) -> Chart:
+    def set_data(self, data: DataFrame | dict) -> Chart:
         pass
 
     def set_option(self, option: dict | ChartOption | BaseOption) -> Chart:
-        self.option = option if isinstance(option, dict) else option.to_dict()
+        self._option = option if isinstance(option, dict) else option.to_dict()
         return self
 
     def to_dict(self) -> dict:
         dataset = (
-            df_to_dataset(self.data) if isinstance(self.data, DataFrame) else dict()
+            df_to_dataset(self._data) if isinstance(self._data, DataFrame) else dict()
         )
         return {
-            "initOptions": asdict(self.init_options),
-            "option": dataset | self.option,
-            "theme": self.theme,
+            "initOptions": asdict(self._init_options),
+            "option": dataset | self._option,
+            "theme": self._theme,
         }
