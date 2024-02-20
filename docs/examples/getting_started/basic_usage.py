@@ -2,9 +2,7 @@ from pandas import DataFrame
 
 # Must always be imported, otherwise App is not found
 from shiny.express import ui
-from shinyecharts import Chart, ChartRenderer, InitOptions
-
-init_options = InitOptions(width=600, height=400, renderer="canvas")
+from shinyecharts import Chart, ChartRenderer
 
 data = DataFrame(
     [[0, 1, 2, 3], [1, 4, 5, 6], [2, -2, 4, 9]],
@@ -13,9 +11,10 @@ data = DataFrame(
 
 
 @ChartRenderer
-def render_dataset():
+def render_line_chart():
     return (
-        Chart(data, init_options)
+        Chart(data)
+        .configure(width=800, height=600)
         .encode("a", "b")
         .encode("a", "c")
         .encode("a", "d")
