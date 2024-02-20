@@ -15,6 +15,7 @@ class Chart(BaseChart):
         self._option = dict(xAxis=dict(), yAxis=dict())
         self.legend()
 
+    # TODO: Use 'attr' from base Chart
     def _update_option(self, **kwargs) -> None:
         self._option.update(**kwargs)
 
@@ -23,6 +24,10 @@ class Chart(BaseChart):
             self._option["series"].append(series)
         else:
             self._update_option(series=[series])
+
+    # Pass InitOptions
+    def configure(self) -> Chart:
+        return self
 
     def dark(self) -> Chart:
         self._theme = "dark"
