@@ -1,7 +1,5 @@
 from pandas import DataFrame
 from shiny.express import ui
-
-# from shinyecharts.express import Chart, InitOptions, SeriesType
 from shinyecharts import Chart, InitOptions, SeriesType
 from shinyecharts.renderer import ChartRenderer
 
@@ -23,7 +21,13 @@ def render_line_chart():
 @ChartRenderer
 def render_line_chart2():
     return Chart(data, theme="dark").add_series(
-        dict(type=SeriesType.LINE, encode=dict(x="a", y="b"), name="b", color="green")
+        dict(
+            type=SeriesType.LINE,
+            encode=dict(x="a", y="b"),
+            name="b",
+            color="green",
+            markPoint=dict(symbol="rect", symbolSize=150),
+        )
     )
 
 
