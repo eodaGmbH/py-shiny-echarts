@@ -11,7 +11,7 @@ class Chart(BaseChart):
     _series_type: str = "line"
 
     def __init__(self, options: InitOptions = InitOptions()):
-        super().__init__(options)
+        super().__init__(None, options)
         self._option = dict(xAxis=dict(), yAxis=dict())
         self.legend()
 
@@ -24,10 +24,6 @@ class Chart(BaseChart):
             self._option["series"].append(series)
         else:
             self._update_option(series=[series])
-
-    # Pass InitOptions
-    def configure(self) -> Chart:
-        return self
 
     def dark(self) -> Chart:
         self._theme = "dark"

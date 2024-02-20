@@ -12,9 +12,15 @@ pie_data = DataFrame(dict(name=["A", "B", "C"], value=[10, 70, 40]))
 
 @ChartRenderer
 def render_line_chart():
-    return Chart().data(data).encode("a", "b").encode("a", "c", color="pink")
+    return (
+        Chart()
+        .set_data(data)
+        .configure(width=900, height=600, renderer="svg")
+        .encode("a", "b")
+        .encode("a", "c", color="pink")
+    )
 
 
 @ChartRenderer
 def render_pie_chart():
-    return Chart().data(pie_data).series("pie")
+    return Chart().set_data(pie_data).series("pie")

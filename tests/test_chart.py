@@ -8,3 +8,10 @@ def test_chart():
 
     # Assert
     print("chart", chart.to_dict())
+
+
+def test_chart_attr():
+    chart = Chart().attr(x_axis=dict(), y_axis=dict())
+
+    print(chart.to_dict())
+    print("chart option", chart.get_option())

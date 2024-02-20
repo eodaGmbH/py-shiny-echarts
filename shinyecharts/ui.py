@@ -17,7 +17,7 @@ def output_chart(id: str) -> Tag:
         # Use resolve_id so that our component will work in a module
         id=resolve_id(id),
         class_="shiny-echarts-output",
-        style="width: 600px;height:400px;",
+        # style="width: 600px;height:400px;",
     )
 
 
