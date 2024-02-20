@@ -56,6 +56,7 @@ class Chart(object):
         return self
 
     def add_series(self, series: dict) -> Chart:
+        """Add series attribute of option object"""
         if SeriesType(series["type"]).value == "bar":
             self._option["xAxis"] = dict(type="category")
 
@@ -76,7 +77,7 @@ class Chart(object):
         type: SeriesType | str = SeriesType.LINE,
         **kwargs,
     ) -> Chart:
-        """Add series to option object"""
+        """Add series attribute to option object"""
         series = dict(name=y, type=type, encode=dict(x=x, y=y)) | kwargs
         self.add_series(series)
         return self
@@ -87,6 +88,7 @@ class Chart(object):
         return self
 
     def to_dict(self) -> dict:
+        # TODO: Create dataset when setting 'self._data'
         dataset = (
             df_to_dataset(self._data) if isinstance(self._data, DataFrame) else dict()
         )

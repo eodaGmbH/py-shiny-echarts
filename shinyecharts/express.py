@@ -1,3 +1,7 @@
+# ==========================
+# TODO: Module is DEPRECATED
+# ==========================
+
 from __future__ import annotations
 
 from pandas import DataFrame
