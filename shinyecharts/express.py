@@ -43,6 +43,7 @@ class Chart(BaseChart):
     def y_axis(self):
         return self
 
+    # TODO: Rename to series_options!? But which method will then add the series?
     def series(self, type: SeriesType | str, **kwargs) -> Chart:
         type = SeriesType(type).value
         if type == "bar":

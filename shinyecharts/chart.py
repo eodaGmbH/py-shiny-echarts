@@ -40,11 +40,16 @@ class Chart(object):
 
     # Set option attributes
     def attr(self, **kwargs) -> Chart:
-        pass
+        self._option.update(**kwargs)
+        return self
 
     # TODO: Set data here
     def set_data(self, data: DataFrame | dict) -> Chart:
-        pass
+        # self._data = (
+        #    df_to_dataset(self._data) if isinstance(self._data, DataFrame) else dict()
+        # )
+        self._data = data
+        return self
 
     def set_option(self, option: dict | ChartOption | BaseOption) -> Chart:
         self._option = option if isinstance(option, dict) else option.to_dict()

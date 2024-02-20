@@ -13,7 +13,8 @@ def snake_to_camel_case(snake_str: str) -> str:
 
 
 def df_to_dataset(df: DataFrame = None) -> dict:
-    return {"dataset": {"source": [df.columns.to_list()] + df.to_numpy().tolist()}}
+    return dict(dataset=dict(source=df.to_dict(orient="list")))
+    # return {"dataset": {"source": [df.columns.to_list()] + df.to_numpy().tolist()}}
 
 
 def df_to_pie_data(df: DataFrame, name: str, value: str) -> list:
