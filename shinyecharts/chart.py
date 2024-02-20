@@ -6,6 +6,7 @@ from typing import Literal
 from pandas import DataFrame
 
 from ._core import BaseOption, df_to_dataset
+from ._enums import SeriesType
 from .options import ChartOption
 
 
@@ -52,6 +53,32 @@ class Chart(object):
     def set_data(self, data: DataFrame | dict) -> Chart:
         """Set dataset attribute of option object"""
         self._data = data
+        return self
+
+    def add_series(self, series: dict) -> Chart:
+        if SeriesType(series["type"]).value == "bar":
+            self._option["xAxis"] = dict(type="category")
+
+        for attr in ["xAxis", "yAxis"]:
+            if not self._option.get(attr) and not series.get("type") == "pie":
+                self._option[attr] = dict()
+
+        if not self._option.get("series"):
+            self._option["series"] = []
+
+        self._option["series"].append(series)
+        return self
+
+    def encode(
+        self,
+        x: str | int,
+        y: str | int,
+        type: SeriesType | str = SeriesType.LINE,
+        **kwargs,
+    ) -> Chart:
+        """Add series to option object"""
+        series = dict(name=y, type=type, encode=dict(x=x, y=y)) | kwargs
+        self.add_series(series)
         return self
 
     def set_option(self, option: dict | ChartOption | BaseOption) -> Chart:
